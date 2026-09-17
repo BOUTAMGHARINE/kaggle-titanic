@@ -20,10 +20,11 @@ def preprocess_data(train,test):
 
     embarked_mode = train["Embarked"].mode()[0]
     train["Embarked"] = train["Embarked"].fillna(embarked_mode)
-    test["Embarked"] = test["Embarked"].fillna(embarked_mode)
+    test["Embarked"] = train["Embarked"].fillna(embarked_mode)
 
     fare_median = train["Fare"].median()
     test["Fare"] = test["Fare"].fillna(fare_median)
+    train["Fare"] = train["Fare"].fillna(fare_median)
 
     train.drop("Cabin",axis=1,inplace=True)
     test.drop("Cabin",axis=1,inplace=True)
